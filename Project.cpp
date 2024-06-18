@@ -20,6 +20,7 @@ objPos foodInfo;//most likely need to move //pof doesnt like
 GameMechs* myGM;//most likely need to move
 Player* myPlayer;//most likely need to move
 Food* myFood;//most likely need to move
+objPosArrayList* myList; // deal with after
 
 
 void Initialize(void);
@@ -60,8 +61,9 @@ void Initialize(void)
     myGM = new GameMechs(X_SIZE,Y_SIZE);//most likely need to move
     myFood = new Food();//most likely need to move
     myPlayer = new Player(myGM, myFood);//most likely need to move
+    myList = new objPosArrayList();
     myPos = {0,0,'@'};
-    myFood->generateFood(myPos);
+    myFood->generateFood(myList);
     myFood->getFoodPos(foodInfo);
     
     //exitFlag = false;
@@ -79,11 +81,11 @@ void RunLogic(void)
     myPlayer->updatePlayerDir();
     myPlayer->movePlayer();
     myFood->getFoodPos(foodInfo);
-    if(myGM->getInput()== 27){
-        myFood->generateFood(test);
-        myFood->getFoodPos(foodInfo);
-        myGM->clearInput();
-    }
+    // if(myGM->getInput()== 27){
+    //     myFood->generateFood(my);
+    //     myFood->getFoodPos(foodInfo);
+    //     myGM->clearInput();
+    // }
 
 }
 
@@ -170,6 +172,6 @@ void LoopDelay(void)
 void CleanUp(void)
 {
     //MacUILib_clearScreen();    
-  
+    //delete 
     MacUILib_uninit();
 }

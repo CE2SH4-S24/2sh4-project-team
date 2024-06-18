@@ -9,11 +9,24 @@ Food::Food(){
 Food::~Food(){
     //empty rn
 }
-void Food::generateFood(objPos blockOff){
+void Food::generateFood(objPosArrayList* blockOff)
+{
+    mainListRef = blockOff;
+    objPos temp;
+    bool flag; 
     do{
     xCandidate = (rand()%(X-2))+1;
     yCandidate = (rand()%(Y-2))+1;
-    }while(xCandidate == blockOff.x && yCandidate == blockOff.y); //checking if they are equal if they are repeat
+    for(int i = 0; i<mainListRef->getSize(); i++){
+        flag = true;
+            mainListRef->getElement(temp, i);
+            
+            if(temp.x == xCandidate && temp.y == yCandidate){
+                flag = false;
+                break;
+            }
+        }
+    }while(!flag); //checking if they are equal if they are repeat
 
     do{
     cCandidate = (rand())%(93);
@@ -23,6 +36,7 @@ void Food::generateFood(objPos blockOff){
     }while(cCandidate == '#' || cCandidate == '@');
     foodPos.setObjPos(xCandidate, yCandidate, cCandidate);
 }
+
 void Food::getFoodPos(objPos &returnPos){
     returnPos = foodPos;
 }

@@ -11,15 +11,15 @@ class Food{
 
     private:
         objPos foodPos;
+        objPosArrayList* mainListRef;
         int xCandidate, yCandidate;
         char cCandidate;
     public:
         Food();
         ~Food();
 
-        void generateFood(objPos blockOff);//update this somehow
+        void generateFood(objPosArrayList* blockOff);//update this somehow
         void getFoodPos(objPos &returnPos);
-        //void setFoodPos();
 };
 
 

@@ -135,7 +135,7 @@ void Player::movePlayer()
     cout << "currHead.x:"<< currHead.x << "currHead.y:" << currHead.y << endl;
     if(currFood.x == currHead.x && currFood.y == currHead.y){ //equality check
         playerPosList->insertHead(currHead); //insert head
-        mainFoodRef->generateFood(currHead);//generate new food
+        mainFoodRef->generateFood(playerPosList);//generate new food
         mainFoodRef->getFoodPos(currFood);
         return;
     }

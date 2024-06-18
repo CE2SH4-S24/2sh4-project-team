@@ -1,4 +1,5 @@
 #include "objPosArrayList.h" 
+#include <iostream>
 
 // Paste your CUTE Tested implementation here.
 // Paste your CUTE Tested implementation here.

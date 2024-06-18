@@ -3,7 +3,10 @@
 
 #include "GameMechs.h"
 #include "objPos.h"
-#include "objPosArrayList.h" 
+#include "objPosArrayList.h"
+#include "Food.h"
+#define X_SIZE 26
+#define Y_SIZE 13
 
 class Player
 {
@@ -16,19 +19,22 @@ class Player
     public:
         enum Dir {STOP, UP, DOWN, LEFT, RIGHT};  // This is the direction state (FSM)
 
-        Player(GameMechs* thisGMRef);
+        Player(GameMechs* thisGMRef, Food* thisFoodRef );
         ~Player();
 
-        void getPlayerPos(objPos &returnPos); // Upgrade this in iteration 3.
+        objPosArrayList* getPlayerPos(); // Upgrade this in iteration 3.
         void updatePlayerDir();
         void movePlayer();
+        // bool checkFoodConsumption();
+        // void increasePlayerLength();
 
     private:
-        objPos playerPos;   // Upgrade this in iteration 3.       
-        enum Dir myDir;
+        objPosArrayList* playerPosList;   // Upgrade this in iteration 3.       
+        enum Dir myDir; //match the stuff from ppa3
 
         // Need a reference to the Main Game Mechanisms
         GameMechs* mainGameMechsRef;
+        Food* mainFoodRef;
 };
 
 #endif

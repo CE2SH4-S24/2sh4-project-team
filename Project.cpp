@@ -75,12 +75,14 @@ void GetInput(void)
 }
 
 void RunLogic(void)
-{
+{   
+    //bool foodDetection;
     objPos test;
     test = {1,2,'o'};
     myPlayer->updatePlayerDir();
     myPlayer->movePlayer();
     myFood->getFoodPos(foodInfo);
+    
     // if(myGM->getInput()== 27){
     //     myFood->generateFood(my);
     //     myFood->getFoodPos(foodInfo);
@@ -140,7 +142,7 @@ void DrawScreen(void)
     // myPlayer->getPlayerPos(tempPos); // to get player position
     //MacUILib_printf("BoardSize: %dx%d, Player Pos: <%d, %d> + %c", myGM->getBoardSizeX(), myGM->getBoardSizeY(), tempPos.x, tempPos.y, tempPos.symbol);
     //MacUILib_printf("Board Size: %dx%d, Player Pos: <%d, %d> + %c\n", myGM->getBoardSizeX(), myGM->getBoardSizeY(), Playerinfo.x, Playerinfo.y, Playerinfo.symbol);
-    MacUILib_printf("Current Score: %d\n", myGM->getScore());
+    MacUILib_printf("Current Score: %d\n", (myGM->getScore()));
     if(myGM->getExitFlagStatus()){
         MacUILib_clearScreen();
         MacUILib_printf("*** Game Has Been Exited ***");

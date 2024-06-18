@@ -17,10 +17,10 @@ Player::Player(GameMechs* thisGMRef, Food* thisFoodRef)
     playerPosList = new objPosArrayList();
     playerPosList->insertHead(tempPos);
     // adding more to make the snake move
-    playerPosList->insertHead(tempPos);
-    playerPosList->insertHead(tempPos);
-    playerPosList->insertHead(tempPos);
-    playerPosList->insertHead(tempPos);
+    // playerPosList->insertHead(tempPos);
+    // playerPosList->insertHead(tempPos);
+    // playerPosList->insertHead(tempPos);
+    // playerPosList->insertHead(tempPos);
 
     //thisFoodRef->generateFood(tempPos);
     //thisFoodRef->getFoodPos(foo);
@@ -100,9 +100,10 @@ void Player::movePlayer()
 {   
     objPos currHead; //objPos instance holding head info
     objPos currFood; //objPos instance holding current food info
+    objPos temp;
     playerPosList->getHeadElement(currHead); // getting head element
     //mainFoodRef->getFoodPos(currFood);
-
+    //bool suicide = false;
     switch(myDir){
         case UP:
             currHead.y--;
@@ -129,19 +130,32 @@ void Player::movePlayer()
             }
             break;
     }
+    for(int i = 1; i<playerPosList->getSize(); i++){
+        playerPosList->getElement(temp, i);
+        if(currHead.x == temp.x && currHead.y == temp.y){
+            //suicide = true;
+            mainGameMechsRef->setLoseFlag();
+            mainGameMechsRef->setExitTrue();
+            break;
+        }
+    }
+    // if(suicide){
 
+    // }
     mainFoodRef->getFoodPos(currFood); //storing the position of object food
-    cout << "currFood.x:"<< currFood.x <<"currFood.y:"<< currFood.y << endl;
-    cout << "currHead.x:"<< currHead.x << "currHead.y:" << currHead.y << endl;
+    // cout << "currFood.x:"<< currFood.x <<"currFood.y:"<< currFood.y << endl;
+    // cout << "currHead.x:"<< currHead.x << "currHead.y:" << currHead.y << endl;
     if(currFood.x == currHead.x && currFood.y == currHead.y){ //equality check
         playerPosList->insertHead(currHead); //insert head
         mainFoodRef->generateFood(playerPosList);//generate new food
         mainFoodRef->getFoodPos(currFood);
+        //cout<<"Test1";
+        mainGameMechsRef->incrementScore();
         return;
     }
     // PPA3 Finite State Machine logic
     //snake movement
-    cout << "Failure";
+    //cout << "Failure";
     playerPosList->insertHead(currHead); //insert head at updated position
     playerPosList->removeTail(); // removes tail to ensure movement of snake
 }

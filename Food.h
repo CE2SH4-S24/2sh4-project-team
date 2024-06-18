@@ -19,6 +19,7 @@ class Food{
 
         void generateFood(objPos blockOff);//update this somehow
         void getFoodPos(objPos &returnPos);
+        //void setFoodPos();
 };
 
 

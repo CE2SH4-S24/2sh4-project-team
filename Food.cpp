@@ -26,3 +26,4 @@ void Food::generateFood(objPos blockOff){
 void Food::getFoodPos(objPos &returnPos){
     returnPos = foodPos;
 }
+//void Food::setFoodPos()

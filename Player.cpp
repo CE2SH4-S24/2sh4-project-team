@@ -141,7 +141,7 @@ void Player::movePlayer()
     }
     // PPA3 Finite State Machine logic
     //snake movement
-
+    cout << "Failure";
     playerPosList->insertHead(currHead); //insert head at updated position
     playerPosList->removeTail(); // removes tail to ensure movement of snake
 }

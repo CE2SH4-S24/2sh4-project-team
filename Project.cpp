@@ -14,7 +14,7 @@ using namespace std;
 #define DELAY_CONST 100000
 
 objPos myPos;//most likely need to move
-objPos foodInfo;//most likely need to move
+objPos foodInfo;//most likely need to move //pof doesnt like
 
 //bool exitFlag;
 GameMechs* myGM;//most likely need to move
@@ -78,6 +78,7 @@ void RunLogic(void)
     test = {1,2,'o'};
     myPlayer->updatePlayerDir();
     myPlayer->movePlayer();
+    myFood->getFoodPos(foodInfo);
     if(myGM->getInput()== 27){
         myFood->generateFood(test);
         myFood->getFoodPos(foodInfo);

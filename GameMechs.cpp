@@ -9,7 +9,7 @@ GameMechs::GameMechs()
     score = 0;
     boardSizeX = 20;
     boardSizeY = 10;
-    //foodPos.setObjPos(-1, -1, 'o'); //initialize out game board
+    
 }
 
 GameMechs::GameMechs(int boardX, int boardY)
@@ -22,10 +22,11 @@ GameMechs::GameMechs(int boardX, int boardY)
     boardSizeY = boardY;
 }
 
-// do you need a destructor? not rn
-// GameMechs::~GameMechs(){
-//     delete
-// }
+
+GameMechs::~GameMechs()
+{
+    
+}
 
 bool GameMechs::getExitFlagStatus()
 {
@@ -67,11 +68,11 @@ void GameMechs::clearInput()
 {
     input = 0;
 }
-//added
+
 void GameMechs::setLoseFlag(){
     loseFlag = true;
 }
-void GameMechs::incrementScore(){ // test by printing and incrementing each repetition
+void GameMechs::incrementScore(){ 
     score++;
 }
 bool GameMechs::getLoseFlagStatus(){
@@ -81,15 +82,3 @@ int GameMechs::getScore(){
     return score;
 }
 
-// Provide definitions of more member functions as required
-// See Project Manual
-// void GameMechs::generateFood(objPos blockoff){
-//     //generate random x and y coords
-//     //make sure not on:
-//     //border
-//     //on player (blockoff)
-//     //remember in object position class you have is posequal method.
-// }
-// void GameMechs::getFoodPos(objPos &returnPos){
-
-// }

@@ -1,26 +1,24 @@
 #include <iostream> 
 #include "MacUILib.h"
 #include "objPos.h"
-//#include "objectPosArrayList.h" 
 #include "GameMechs.h"
 #include "Player.h"
 #include "Food.h"
 #include "ctime"
 
-//if somebody talk to somebody need to include header file
 
 using namespace std;
 
 #define DELAY_CONST 100000
 
-objPos myPos;//most likely need to move
-objPos foodInfo;//most likely need to move //pof doesnt like
+objPos myPos;
+objPos foodInfo;
 
-//bool exitFlag;
-GameMechs* myGM;//most likely need to move
-Player* myPlayer;//most likely need to move
-Food* myFood;//most likely need to move
-objPosArrayList* myList; // deal with after
+
+GameMechs* myGM;
+Player* myPlayer;
+Food* myFood;
+objPosArrayList* myList;
 
 
 void Initialize(void);
@@ -37,9 +35,7 @@ int main(void)
     
     Initialize();
 
-    //cout<<"check1\n";
-    cout<<myGM->getBoardSizeY()<<"\n";
-    cout<<myGM->getBoardSizeX()<<"\n";
+    
     while(myGM->getExitFlagStatus() == false)  
     {
         GetInput();
@@ -54,19 +50,19 @@ int main(void)
 
 
 void Initialize(void)
-{   //objPos temp = {0, 0, 'o'};
+{   
     srand(time(NULL));
     MacUILib_init();
-    //MacUILib_clearScreen();
-    myGM = new GameMechs(X_SIZE,Y_SIZE);//most likely need to move
-    myFood = new Food();//most likely need to move
-    myPlayer = new Player(myGM, myFood);//most likely need to move
+    
+    myGM = new GameMechs(X_SIZE,Y_SIZE);
+    myFood = new Food();
+    myPlayer = new Player(myGM, myFood);
     myList = new objPosArrayList();
     myPos = {0,0,'@'};
     myFood->generateFood(myList);
     myFood->getFoodPos(foodInfo);
     
-    //exitFlag = false;
+    
 } 
 
 void GetInput(void)
@@ -76,19 +72,13 @@ void GetInput(void)
 
 void RunLogic(void)
 {   
-    //bool foodDetection;
+    
     objPos test;
     test = {1,2,'o'};
     myPlayer->updatePlayerDir();
     myPlayer->movePlayer();
     myFood->getFoodPos(foodInfo);
     
-    // if(myGM->getInput()== 27){
-    //     myFood->generateFood(my);
-    //     myFood->getFoodPos(foodInfo);
-    //     myGM->clearInput();
-    // }
-
 }
 
 void DrawScreen(void)
@@ -101,9 +91,9 @@ void DrawScreen(void)
 
     for (i = 0; i<myGM->getBoardSizeY(); i++) //Rows
     {   
-        for(j = 0; j<myGM->getBoardSizeX(); j++){//use getter functiosn
+        for(j = 0; j<myGM->getBoardSizeX(); j++){//Columns
 
-            bool drawn = false;
+            bool drawn = false; //drawn flag
             for(ID = 0; ID<playerBody->getSize(); ID++){
 
                 playerBody->getElement(tempBody, ID);
@@ -116,14 +106,13 @@ void DrawScreen(void)
             }
             if(drawn) continue;
 
-            else if(i == foodInfo.y && j == foodInfo.x){
+            else if(i == foodInfo.y && j == foodInfo.x){ //draw food symbol
                 putchar(foodInfo.symbol);
-                //printf("HAHAHAHAAH\n");
+                
             }
-            else if(i%(myGM->getBoardSizeY()-1) == 0){
+            else if(i%(myGM->getBoardSizeY()-1) == 0){ //draw borders
                 putchar('#');
                 if(j == (myGM->getBoardSizeX()-1)){
-                    //if(i == 0) putchar('#');
                     putchar('\n');
                 }
             }
@@ -134,34 +123,27 @@ void DrawScreen(void)
                 }
             }
             else{
-                putchar(' ');
+                putchar(' '); //fill rest of board
             }
         }
     }
-    // objPos tempPos;
-    // myPlayer->getPlayerPos(tempPos); // to get player position
-    //MacUILib_printf("BoardSize: %dx%d, Player Pos: <%d, %d> + %c", myGM->getBoardSizeX(), myGM->getBoardSizeY(), tempPos.x, tempPos.y, tempPos.symbol);
-    //MacUILib_printf("Board Size: %dx%d, Player Pos: <%d, %d> + %c\n", myGM->getBoardSizeX(), myGM->getBoardSizeY(), Playerinfo.x, Playerinfo.y, Playerinfo.symbol);
+    
     MacUILib_printf("Current Score: %d\n", (myGM->getScore()));
     if(myGM->getExitFlagStatus()){
         MacUILib_clearScreen();
         MacUILib_printf("*** Game Has Been Exited ***");
-        //MacUILib_Delay(20*DELAY_CONST);
+        
     }
     
     if(myGM->getLoseFlagStatus()){
         MacUILib_clearScreen();
-        MacUILib_printf("*** You Lost - Score: %d ***", myGM->getScore());
-        //MacUILib_Delay(20*DELAY_CONST);
+        MacUILib_printf("*** You Lost - Score: %d ***", myGM->getScore()); // Loss message
+    
+       
     }
-    //PRINTING THE FOOD POSITION:
-    MacUILib_printf("Food info: <%d, %d, %c>\n", foodInfo.x, foodInfo.y, foodInfo.symbol);
-    MacUILib_printf("Player Positons:\n");
-    for(ID = 0; ID<playerBody->getSize(); ID++)
-    {   
-        playerBody->getElement(tempBody,ID);
-        MacUILib_printf("ID: <%d, %d>", tempBody.x, tempBody.y);
-    }
+    //PRINTING THE STATIC DISPLAY:
+    MacUILib_printf("Controls: W - UP A- LEFT\nS - DOWN D - RIGHT\nPress 'Space' to exit game.");
+    
 }
 
 
@@ -173,7 +155,9 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {
-    //MacUILib_clearScreen();    
-    //delete 
+    // delete myGM;
+    delete myFood;
+    delete myPlayer;
+    delete myList;
     MacUILib_uninit();
 }

@@ -2,7 +2,7 @@
 #define GAMEMECHS_H
 
 #include <cstdlib>
-#include <time.h> // C++ time() ofr somehting
+#include <time.h> 
 
 #include "objPos.h"
 #include "objPosArrayList.h"
@@ -20,32 +20,31 @@ class GameMechs
     // You will include more data members and member functions to complete your design.
 
     private:
-        //objPos foodPos;
+        
         char input;
         bool exitFlag;
         bool loseFlag;
-        int score; //score apples eaten type beat
+        int score; 
         int boardSizeX;
         int boardSizeY;
 
     public:
         GameMechs();
         GameMechs(int boardX, int boardY);
-        ~GameMechs(); //destructor might not even use this bitch
+        ~GameMechs(); 
         
         bool getExitFlagStatus();
-        bool getLoseFlagStatus();//For losing condition
+        bool getLoseFlagStatus();
         void setExitTrue();
-        void setLoseFlag(); //added hopefully done
+        void setLoseFlag(); 
         char getInput();
         void setInput(char this_input);
         int getScore();
         void clearInput();
-        void incrementScore(); // added
+        void incrementScore(); 
         int getBoardSizeX();
         int getBoardSizeY();
-        //void generateFood(objPos blockoff);
-        //void getFoodPos(objPos &returnPos);
+        
       
 
 };

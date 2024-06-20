@@ -1,37 +1,27 @@
 #include "Player.h"
-//#include "GameMechs.h"
 #include <iostream>
 using namespace std;
 
  
 Player::Player(GameMechs* thisGMRef, Food* thisFoodRef)
 {
-    mainGameMechsRef = thisGMRef; //deal with later
+    mainGameMechsRef = thisGMRef; 
     mainFoodRef = thisFoodRef;
     myDir = STOP;
 
-    // more actions to be included
+    
     objPos tempPos;
-    //objPos foodStuff;
     tempPos.setObjPos(mainGameMechsRef->getBoardSizeX()/2,mainGameMechsRef->getBoardSizeY()/2, '@');
     playerPosList = new objPosArrayList();
     playerPosList->insertHead(tempPos);
-    // adding more to make the snake move
-    // playerPosList->insertHead(tempPos);
-    // playerPosList->insertHead(tempPos);
-    // playerPosList->insertHead(tempPos);
-    // playerPosList->insertHead(tempPos);
-
-    //thisFoodRef->generateFood(tempPos);
-    //thisFoodRef->getFoodPos(foo);
+    
     
 }
 
 
 Player::~Player()
 {
-    //leave empty for now iteation 3 will use
-    // delete any heap members here
+    
     delete playerPosList;
 }
 
@@ -43,13 +33,9 @@ objPosArrayList* Player::getPlayerPos()
 
 void Player::updatePlayerDir()
 {
-    // PPA3 input processing logic
-    // Copy the switch satement here from PPA3 can remove the speed?
-    // will be a fucntion in game mechs to check input and store most
-    // recnt input need to find how to get
-    // think i figured this jawn out lol
+    
 
-    switch(mainGameMechsRef->getInput()){
+    switch(mainGameMechsRef->getInput()){ //input processing logic
             case 'w': 
                 if(myDir != DOWN){
                     myDir = UP;
@@ -91,7 +77,7 @@ void Player::updatePlayerDir()
                     myDir = RIGHT;
                 }
                 break;
-            case 32:
+            case 32: //space bar set as exit key
                 mainGameMechsRef->setExitTrue();
     }       
 }
@@ -102,9 +88,8 @@ void Player::movePlayer()
     objPos currFood; //objPos instance holding current food info
     objPos temp;
     playerPosList->getHeadElement(currHead); // getting head element
-    //mainFoodRef->getFoodPos(currFood);
-    //bool suicide = false;
-    switch(myDir){
+   
+    switch(myDir){ //player movement logic/FSM implementation
         case UP:
             currHead.y--;
             if(currHead.y == 0){
@@ -132,34 +117,22 @@ void Player::movePlayer()
     }
     for(int i = 1; i<playerPosList->getSize(); i++){
         playerPosList->getElement(temp, i);
-        if(currHead.x == temp.x && currHead.y == temp.y){
-            //suicide = true;
-            mainGameMechsRef->setLoseFlag();
+        if(currHead.x == temp.x && currHead.y == temp.y){ //if head collides with any body parts, exit
+            mainGameMechsRef->setLoseFlag(); 
             mainGameMechsRef->setExitTrue();
             break;
         }
     }
-    // if(suicide){
-
-    // }
+    
     mainFoodRef->getFoodPos(currFood); //storing the position of object food
-    // cout << "currFood.x:"<< currFood.x <<"currFood.y:"<< currFood.y << endl;
-    // cout << "currHead.x:"<< currHead.x << "currHead.y:" << currHead.y << endl;
     if(currFood.x == currHead.x && currFood.y == currHead.y){ //equality check
         playerPosList->insertHead(currHead); //insert head
         mainFoodRef->generateFood(playerPosList);//generate new food
         mainFoodRef->getFoodPos(currFood);
-        //cout<<"Test1";
         mainGameMechsRef->incrementScore();
         return;
     }
-    // PPA3 Finite State Machine logic
-    //snake movement
-    //cout << "Failure";
     playerPosList->insertHead(currHead); //insert head at updated position
     playerPosList->removeTail(); // removes tail to ensure movement of snake
 }
 
-// bool Player::checkFoodConsumption(){
-
-// }

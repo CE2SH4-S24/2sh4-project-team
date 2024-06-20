@@ -18,7 +18,7 @@ class Food{
         Food();
         ~Food();
 
-        void generateFood(objPosArrayList* blockOff);//update this somehow
+        void generateFood(objPosArrayList* blockOff);
         void getFoodPos(objPos &returnPos);
 };
 

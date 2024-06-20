@@ -24,43 +24,49 @@ int objPosArrayList::getSize()
 
 void objPosArrayList::insertHead(objPos thisPos)
 {   
-    if(sizeArray == sizeList){
-        //cout<< "List and array same size cannot add head\n";
+    if(sizeArray == sizeList)
+    {
+        
         return;
     }
-    for(int i = sizeList; i>0; i--){
-        aList[i] = aList[i-1];
+    for(int i = sizeList; i>0; i--)
+    {
+       aList[i].setObjPos(aList[i-1]);
     }
-    aList[0] = thisPos;
+    aList[0].setObjPos(thisPos);
     sizeList++;
 }
 
 void objPosArrayList::insertTail(objPos thisPos)
 {
-    if(sizeArray == sizeList){
-        //cout<< "List and array same size cannot add tail\n";
+    if(sizeArray == sizeList)
+    {
+        
         return;
     }
-    aList[sizeList] = thisPos;
+    aList[sizeList].setObjPos(thisPos);
     sizeList++;
 }
 
 void objPosArrayList::removeHead()
 {
-    if(sizeList==0){
-        //cout<<"List size 0 cannot remove head\n";
+    if(sizeList==0)
+    {
+        
         return;
     }
-    for(int i = 0; i<sizeList-1; i++){
-        aList[i] = aList[i+1];
+    for(int i = 0; i<sizeList-1; i++)
+    {
+        aList[i].setObjPos(aList[i + 1]);
     }
     sizeList--;
 }
 
 void objPosArrayList::removeTail()
 {
-    if(sizeList == 0){
-        //cout<<"List Empty. No removal allowed!"<<endl;
+    if(sizeList == 0)
+    {
+        
         return;
     }
     sizeList--;
@@ -68,15 +74,15 @@ void objPosArrayList::removeTail()
 
 void objPosArrayList::getHeadElement(objPos &returnPos)
 {
-    returnPos = aList[0];
+    returnPos.setObjPos(aList[0]);
 }
 
 void objPosArrayList::getTailElement(objPos &returnPos)
 {
-    returnPos = aList[sizeList-1];
+    returnPos.setObjPos(aList[sizeList - 1]);
 }
 
 void objPosArrayList::getElement(objPos &returnPos, int index)
 {
-    returnPos = aList[index];
+    returnPos.setObjPos(aList[index]);
 }

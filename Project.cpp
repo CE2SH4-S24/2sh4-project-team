@@ -155,9 +155,10 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {
-    // delete myGM;
+    
     delete myFood;
     delete myPlayer;
     delete myList;
+    delete myGM;
     MacUILib_uninit();
 }

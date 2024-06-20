@@ -13,14 +13,6 @@ Group Member 1 Information:
 
 Name: Losey, Sean
 
-MacID: loseys
-
-Student No.: 400405521
-
 Group Member 2 Information:
 
 Name: Tomar, Jay
-
-MacID: tomarj
-
-Student No.: 400407477
